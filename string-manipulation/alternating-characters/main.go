@@ -18,18 +18,20 @@ import (
 
 func alternatingCharacters(s string) int32 {
 	// Write your code here
-	var output string
+	del := 0
+	checkpoint := 0
+	runes := []rune(s)
 	for i, _ := range s {
 		//while the same character do not add
-		if i == 0 {
-			output = fmt.Sprint(string([]rune(s)[i]))
+		if i == checkpoint {
 			continue
 		}
-		if string([]rune(s)[i]) != string([]rune(output)[len(output)-1]) {
-			output = fmt.Sprintf("%s%s", output, string([]rune(s)[i]))
+		if string(runes[i]) == string(runes[checkpoint]) {
+			del++
 		}
+		checkpoint++
 	}
-	return int32(len(s) - len(output))
+	return int32(del)
 }
 
 func main() {
